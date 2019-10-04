@@ -1,4 +1,4 @@
 # CS370TermProject
 Raspberry Home
 
-# undo it
+# I am learning so much
