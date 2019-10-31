@@ -186,7 +186,7 @@ class SampleAssistant(object):
                              ' '.join(r.transcript
                                       for r in resp.speech_results))
             if len(resp.audio_out.audio_data) > 0:
-                console.log(resp.audio_out.audio_data)
+                print(str(resp.audio_out.audio_data))
                 if not self.conversation_stream.playing:
                     self.conversation_stream.stop_recording()
                     self.conversation_stream.start_playback()
