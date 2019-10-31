@@ -222,6 +222,7 @@ class SampleAssistant(object):
             concurrent.futures.wait(device_actions_futures)
 
         logging.info('Finished playing assistant response.')
+        self.conversation_stream.stop_recording()
         self.conversation_stream.stop_playback()
         return continue_conversation
 
