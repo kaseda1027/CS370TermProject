@@ -150,7 +150,9 @@ class SampleAssistant(object):
                         logging.info('Detected keyword, preparing for response:')
                         resp.audio_out.audio_data = bytes();
                         resp.speech_results.__delslice__(0,-1)
-                        self.assist()
+                        continue_conversation = True
+                        while continue_conversation:
+                            continue_conversation = self.assist()
 
 
     @retry(reraise=True, stop=stop_after_attempt(3),
