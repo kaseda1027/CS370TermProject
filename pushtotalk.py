@@ -149,7 +149,7 @@ class SampleAssistant(object):
                     logging.info('Transcript of current speech: "%s".', transcript)
                     if hasHotword(transcript):
                         logging.info('Detected keyword, preparing for response:')
-                        resp.audio_out.audio_data = '';
+                        resp.audio_out.audio_data = bytes();
                         self.conversation_stream.stop_recording()
                         self.assist()
 
