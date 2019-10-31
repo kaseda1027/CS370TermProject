@@ -129,7 +129,7 @@ class SampleAssistant(object):
         hotphrases = ['hello pi', 'okay pi', 'hey pi', 'ok pi', 
                       'hello pai', 'okay pai', 'hey pai', 'ok pai', 
                       'hello computer', 'okay computer', 'ok computer', 'hey computer',
-                      'hello yashua on', 'okay yashua on', 'ok yashua on', 'hey yashua on']
+                      'hello yahshua on', 'okay yahshua on', 'ok yahshua on', 'hey yahshua on']
 
         while True:
             self.conversation_stream.start_recording()
