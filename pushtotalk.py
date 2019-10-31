@@ -126,8 +126,10 @@ class SampleAssistant(object):
                 yield c
             logging.debug('Reached end of AssistRequest iteration.')
 
-        hotphrases = ['hello pi', 'okay pi', 'hey pi', 'ok pi', 'hello pai', 'okay pai', 'hey pai', 'ok pai', 
-            'hello computer', 'okay computer', 'ok computer', 'hey computer']
+        hotphrases = ['hello pi', 'okay pi', 'hey pi', 'ok pi', 
+                      'hello pai', 'okay pai', 'hey pai', 'ok pai', 
+                      'hello computer', 'okay computer', 'ok computer', 'hey computer',
+                      'hello yashua on', 'okay yashua on', 'ok yashua on', 'hey yashua on']
 
         while True:
             self.conversation_stream.start_recording()
