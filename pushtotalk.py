@@ -153,6 +153,9 @@ class SampleAssistant(object):
                         continue_conversation = True
                         while continue_conversation:
                             continue_conversation = self.assist()
+                        resp.audio_out.audio_data = bytes();
+                        resp.speech_results.__delslice__(0,-1)
+                        
 
 
     @retry(reraise=True, stop=stop_after_attempt(3),
