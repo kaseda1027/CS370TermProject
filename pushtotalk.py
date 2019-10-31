@@ -114,6 +114,40 @@ class SampleAssistant(object):
             return True
         return False
 
+
+    @retry(reraise=True, stop=stop_after_attempt(3),
+           retry=retry_if_exception(is_grpc_error_unavailable))
+    def assistWithHotword(self):
+        """Wait for hotword to occur
+        """
+        def iter_log_assist_requests():
+            for c in self.gen_assist_requests():
+                assistant_helpers.log_assist_request_without_audio(c)
+                yield c
+            logging.debug('Reached end of AssistRequest iteration.')
+
+        while True:
+            self.conversation_stream.start_recording()
+            logging.info('Waiting for hotword')
+
+            # This generator yields AssistResponse proto messages
+            # received from the gRPC Google Assistant API.
+            for resp in self.assistant.Assist(iter_log_assist_requests(),
+                                              self.deadline):
+                assistant_helpers.log_assist_response_without_audio(resp)
+                if resp.event_type == END_OF_UTTERANCE:
+                    logging.info('End of phrase detected, trimming audio...')
+                    self.conversation_stream.stop_recording()
+                    self.conversation_stream.start_recording()
+                if resp.speech_results:
+                    transcript = ' '.join(r.transcript for r in resp.speech_results)
+                    logging.info('Transcript of current speech: "%s".', transcript)
+                    if 'hello pi' in transcript.lower() or 'okay pi' in transcript.lower() or 'ok pi' in transcript.lower():
+                        logging.info('Detected keyword, preparing for response:')
+                        self.conversation_stream.stop_recording()
+                        self.assist()
+
+
     @retry(reraise=True, stop=stop_after_attempt(3),
            retry=retry_if_exception(is_grpc_error_unavailable))
     def assist(self):
@@ -452,6 +486,7 @@ def main(api_endpoint, credentials, project_id,
         # and playing back assistant response using the speaker.
         # When the once flag is set, don't wait for a trigger. Otherwise, wait.
         wait_for_user_trigger = not once
+        assistant.assistWithHotword()
         while True:
             if wait_for_user_trigger:
                 click.pause(info='Press Enter to send a new request...')
