@@ -126,6 +126,11 @@ class SampleAssistant(object):
                 yield c
             logging.debug('Reached end of AssistRequest iteration.')
 
+        def hasHotword(transcript):
+            return ('hello pi' in transcript.lower() or 'okay pi' in transcript.lower() or 'ok pi' in transcript.lower()
+                or 'hello pai' in transcript.lower() or 'okay pai' in transcript.lower() or 'ok pai' in transcript.lower()
+                or 'hello computer' in transcript.lower() or 'okay computer' in transcript.lower() or 'ok computer' in transcript.lower())
+
         while True:
             self.conversation_stream.start_recording()
             logging.info('Waiting for hotword')
@@ -142,7 +147,7 @@ class SampleAssistant(object):
                 if resp.speech_results:
                     transcript = ' '.join(r.transcript for r in resp.speech_results)
                     logging.info('Transcript of current speech: "%s".', transcript)
-                    if 'hello pi' in transcript.lower() or 'okay pi' in transcript.lower() or 'ok pi' in transcript.lower():
+                    if hasHotword(transcript):
                         logging.info('Detected keyword, preparing for response:')
                         self.conversation_stream.stop_recording()
                         self.assist()
@@ -181,6 +186,7 @@ class SampleAssistant(object):
                              ' '.join(r.transcript
                                       for r in resp.speech_results))
             if len(resp.audio_out.audio_data) > 0:
+                console.log(resp.audio_out.audio_data)
                 if not self.conversation_stream.playing:
                     self.conversation_stream.stop_recording()
                     self.conversation_stream.start_playback()
