@@ -148,7 +148,7 @@ class SampleAssistant(object):
                     if any([match for match in hotphrases if match in transcript.lower()]):
                         logging.info('Detected keyword, preparing for response:')
                         resp.audio_out.audio_data = bytes();
-                        resp.speech_results.delslice(0,-1)
+                        resp.speech_results.__delslice__(0,-1)
                         self.conversation_stream.stop_recording()
                         self.assist()
 
