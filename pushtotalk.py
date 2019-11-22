@@ -129,7 +129,8 @@ class SampleAssistant(object):
         hotphrases = ['hello pi', 'okay pi', 'hey pi', 'ok pi', 
                       'hello pai', 'okay pai', 'hey pai', 'ok pai', 
                       'hello computer', 'okay computer', 'ok computer', 'hey computer',
-                      'hello yahshua on', 'okay yahshua on', 'ok yahshua on', 'hey yahshua on']
+                      'hello yahshua on', 'okay yahshua on', 'ok yahshua on', 'hey yahshua on',
+                      'hello matt', 'okay matt', 'ok matt', 'hey matt']
 
         while True:
             self.conversation_stream.start_recording()
@@ -149,7 +150,10 @@ class SampleAssistant(object):
                     logging.info('Transcript of current speech: "%s".', transcript)
                     if any([match for match in hotphrases if match in transcript.lower()]):
                         self.conversation_stream.stop_recording()
+                        #here is where we want the noise 
+                
                         logging.info('Detected keyword, preparing for response:')
+
                         resp.audio_out.audio_data = bytes();
                         resp.speech_results.__delslice__(0,-1)
                         continue_conversation = True
