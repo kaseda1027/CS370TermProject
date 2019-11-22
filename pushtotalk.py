@@ -152,7 +152,7 @@ class SampleAssistant(object):
                     if any([match for match in hotphrases if match in transcript.lower()]):
                         self.conversation_stream.stop_recording()
                         #here is where we want the noise 
-                        file ="TONE.WAV"
+                        file ="Sound.mp3"
                         os.system("mpg123 "+ file)
                         logging.info('Detected keyword, preparing for response:')
 
