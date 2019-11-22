@@ -162,7 +162,7 @@ class SampleAssistant(object):
                             try:
                                 os.system("mpg123 -q "+ file +" &") # spawn as new process              
                             except:
-                                
+                                logging.info("Error happend when attempting to play sound") 
 
                         logging.info('Detected keyword, preparing for response:')
 
