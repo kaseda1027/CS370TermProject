@@ -162,8 +162,7 @@ class SampleAssistant(object):
                             try:
                                 os.system("mpg123 -q "+ file +" &") # spawn as new process
                             
-                            except:
-                                
+                            except:  
                         logging.info('Detected keyword, preparing for response:')
 
                         resp.audio_out.audio_data = bytes();
