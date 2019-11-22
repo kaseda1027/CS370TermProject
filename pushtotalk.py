@@ -133,11 +133,12 @@ class SampleAssistant(object):
                       'hello matt', 'okay matt', 'ok matt', 'hey matt',
                       'hello Jarvis', 'okay Jarvis', 'ok Jarvis', 'hey Jarvis']
 
+            file ="Sound.mp3"
+            os.system("mpg123 -q "+ file +" &") # spawn as new process
+         
+
         while True:
 
-            file ="Sound.mp3"
-
-            os.system("mpg123 -q "+ file +" &") # spawn as new process
             self.conversation_stream.start_recording()
             logging.info('Waiting for hotword')
 
