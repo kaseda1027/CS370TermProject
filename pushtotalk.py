@@ -29,7 +29,8 @@ import grpc
 import google.auth.transport.grpc
 import google.auth.transport.requests
 import google.oauth2.credentials
-from playsound import playsound
+from pydub import AduioSegment
+from pydub.playback import play
 
 from google.assistant.embedded.v1alpha2 import (
     embedded_assistant_pb2,
@@ -153,7 +154,8 @@ class SampleAssistant(object):
                     if any([match for match in hotphrases if match in transcript.lower()]):
                         self.conversation_stream.stop_recording()
                         #here is where we want the noise 
-                        playsound('TONE.WAV')
+                        song = AudioSegment.from_wav("TONE.WAV")
+                        play(song)
                         logging.info('Detected keyword, preparing for response:')
 
                         resp.audio_out.audio_data = bytes();
