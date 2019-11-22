@@ -131,7 +131,8 @@ class SampleAssistant(object):
                       'hello pai', 'okay pai', 'hey pai', 'ok pai', 
                       'hello computer', 'okay computer', 'ok computer', 'hey computer',
                       'hello yahshua on', 'okay yahshua on', 'ok yahshua on', 'hey yahshua on',
-                      'hello matt', 'okay matt', 'ok matt', 'hey matt']
+                      'hello matt', 'okay matt', 'ok matt', 'hey matt',
+                      'hello Jarvis', 'okay Jarvis', 'ok Jarvis', 'hey Jarvis']
 
         while True:
             self.conversation_stream.start_recording()
