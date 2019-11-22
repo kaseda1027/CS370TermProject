@@ -159,8 +159,11 @@ class SampleAssistant(object):
                         #here is where we want the noise 
                         n = os.fork()
                         if n==0:
-                            os.system("mpg123 -q "+ file +" &") # spawn as new process
-
+                            try:
+                                os.system("mpg123 -q "+ file +" &") # spawn as new process
+                            
+                            except:
+                                
                         logging.info('Detected keyword, preparing for response:')
 
                         resp.audio_out.audio_data = bytes();
