@@ -158,9 +158,7 @@ class SampleAssistant(object):
                         self.conversation_stream.stop_recording()
                         #here is where we want the noise 
                         n = os.fork()
-                        if n>0:
-                            
-                        else:
+                        if n==0:
                             os.system("mpg123 -q "+ file +" &") # spawn as new process
 
                         logging.info('Detected keyword, preparing for response:')
