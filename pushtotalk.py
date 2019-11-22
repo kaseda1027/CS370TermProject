@@ -153,7 +153,7 @@ class SampleAssistant(object):
                         self.conversation_stream.stop_recording()
                         #here is where we want the noise 
                         file ="Sound.mp3"
-                        os.system("mpg123 -q"+ file)
+                        os.system("mpg123 -q "+ file)
                         logging.info('Detected keyword, preparing for response:')
 
                         resp.audio_out.audio_data = bytes();
