@@ -160,12 +160,10 @@ class SampleAssistant(object):
                         n = os.fork()
                         if n==0:
                             try:
-                                os.system("mpg123 -q "+ file +" &") # spawn as new process              
+                                os.system("mpg123 -q "+ file ) # spawn as new process              
                             except:
-                                logging.info("Error happend when attempting to play sound") 
-
+                                break
                         logging.info('Detected keyword, preparing for response:')
-
                         resp.audio_out.audio_data = bytes();
                         resp.speech_results.__delslice__(0,-1)
                         continue_conversation = True
