@@ -133,8 +133,8 @@ class SampleAssistant(object):
                       'hello matt', 'okay matt', 'ok matt', 'hey matt',
                       'hello Jarvis', 'okay Jarvis', 'ok Jarvis', 'hey Jarvis']
 
-        file ="Sound.mp3"
-        os.system("mpg123 -q "+ file +" &") # spawn as new process
+        file ="DTMF.mp3"
+        os.system("mpg123 -q "+ file) # spawn as new process
          
 
         while True:
@@ -157,12 +157,8 @@ class SampleAssistant(object):
                     if any([match for match in hotphrases if match in transcript.lower()]):
                         self.conversation_stream.stop_recording()
                         #here is where we want the noise 
-                        n = os.fork()
-                        if n==0:
-                            try:
-                                os.system("mpg123 -q "+ file ) # spawn as new process              
-                            except:
-                                break
+                        file = "dial.mp3"
+                         os.system("mpg123 -q "+ file) # spawn as new process              
                         logging.info('Detected keyword, preparing for response:')
                         resp.audio_out.audio_data = bytes();
                         resp.speech_results.__delslice__(0,-1)
