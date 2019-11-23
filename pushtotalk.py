@@ -131,7 +131,7 @@ class SampleAssistant(object):
                       'hello computer', 'okay computer', 'ok computer', 'hey computer',
                       'hello yahshua on', 'okay yahshua on', 'ok yahshua on', 'hey yahshua on',
                       'hello matt', 'okay matt', 'ok matt', 'hey matt',
-                      'hello Jarvis', 'okay Jarvis', 'ok Jarvis', 'hey Jarvis']
+                      'hello jarvis', 'okay jarvis', 'ok jarvis', 'hey jarvis']
 
         file ="DTMF.mp3"
         os.system("mpg123 -q "+ file) # spawn as new process
