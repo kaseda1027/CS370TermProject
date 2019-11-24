@@ -141,7 +141,7 @@ class SampleAssistant(object):
         os.system("mpg123 -q "+ file) # loud sound on boot up
          
 
-        while True:
+		while True:
 			try:
 				self.conversation_stream.start_recording()
 				logging.info('Waiting for hotword')
@@ -160,7 +160,6 @@ class SampleAssistant(object):
 						logging.info('Transcript of current speech: "%s".', transcript)
 						if any([match for match in hotphrases if match in transcript.lower()]):
 							self.conversation_stream.stop_recording()
-                       
 							file = "dial.mp3"
 							os.system("mpg123 -q "+ file) # plays sound after hearing hotWord, must wait untill sound is finished to contiune            
 							logging.info('Detected keyword, preparing for response:')
