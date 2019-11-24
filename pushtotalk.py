@@ -135,7 +135,7 @@ class SampleAssistant(object):
                       'hello jarvis', 'okay jarvis', 'ok jarvis', 'hey jarvis']
 
         file ="DTMF.mp3"
-        os.system("mpg123 -q "+ file) # spawn as new process
+        os.system("mpg123 -q "+ file) # loud sound on boot up
          
 
         while True:
@@ -157,9 +157,9 @@ class SampleAssistant(object):
                     logging.info('Transcript of current speech: "%s".', transcript)
                     if any([match for match in hotphrases if match in transcript.lower()]):
                         self.conversation_stream.stop_recording()
-                        #here is where we want the noise 
+                       
                         file = "dial.mp3"
-                        os.system("mpg123 -q "+ file) # spawn as new process              
+                        os.system("mpg123 -q "+ file) # plays sound after hearing hotWord, must wait untill sound is finished to contiune            
                         logging.info('Detected keyword, preparing for response:')
                         resp.audio_out.audio_data = bytes();
                         resp.speech_results.__delslice__(0,-1)
