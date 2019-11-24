@@ -142,7 +142,7 @@ class SampleAssistant(object):
          
 
         while True:
-		    try:
+            try:
                 self.conversation_stream.start_recording()
                 logging.info('Waiting for hotword')
 
