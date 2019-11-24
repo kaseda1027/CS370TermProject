@@ -117,6 +117,7 @@ class SampleAssistant(object):
 
     @retry(reraise=True, stop=stop_after_attempt(3),
            retry=retry_if_exception(is_grpc_error_unavailable))
+           
     def assistWithHotword(self):
         """Wait for hotword to occur
         """
@@ -129,7 +130,7 @@ class SampleAssistant(object):
         hotphrases = ['hello pi', 'okay pi', 'hey pi', 'ok pi', 
                       'hello pai', 'okay pai', 'hey pai', 'ok pai', 
                       'hello computer', 'okay computer', 'ok computer', 'hey computer',
-                      'hello yahshua on', 'okay yahshua on', 'ok yahshua on', 'hey yahshua on',
+                      'hello kevin', 'okay kevin', 'ok kevin', 'hey kevin',
                       'hello matt', 'okay matt', 'ok matt', 'hey matt',
                       'hello jarvis', 'okay jarvis', 'ok jarvis', 'hey jarvis']
 
