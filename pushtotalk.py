@@ -172,8 +172,8 @@ class SampleAssistant(object):
                             break
             
             except:
-				logging.info('Error quota exceded shutting down project')
-				os.system("shutdown(0)")
+                logging.info('Error quota exceded shutting down project')
+                os.system("shutdown(0)")
 
 
     @retry(reraise=True, stop=stop_after_attempt(3),
