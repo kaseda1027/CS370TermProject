@@ -172,7 +172,7 @@ class SampleAssistant(object):
                             break
             
             except:
-				continue  
+				continue
 
 
     @retry(reraise=True, stop=stop_after_attempt(3),
