@@ -132,7 +132,10 @@ class SampleAssistant(object):
                       'hello computer', 'okay computer', 'ok computer', 'hey computer',
                       'hello kevin', 'okay kevin', 'ok kevin', 'hey kevin',
                       'hello matt', 'okay matt', 'ok matt', 'hey matt',
-                      'hello jarvis', 'okay jarvis', 'ok jarvis', 'hey jarvis']
+                      'hello jarvis', 'okay jarvis', 'ok jarvis', 'hey jarvis',
+                      'computer', 'computer', 'computer', 'computer',
+                      'hello finn', 'okay finn', 'ok finn', 'hey finn',
+                      'hello hafen', 'okay hafen', 'ok hafen', 'hey hafen',]
 
         file ="DTMF.mp3"
         os.system("mpg123 -q "+ file) # loud sound on boot up
