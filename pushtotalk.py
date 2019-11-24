@@ -141,37 +141,38 @@ class SampleAssistant(object):
         os.system("mpg123 -q "+ file) # loud sound on boot up
          
 
-		while True:
-			try:
-				self.conversation_stream.start_recording()
-				logging.info('Waiting for hotword')
+        while True:
+		    try:
+                self.conversation_stream.start_recording()
+                logging.info('Waiting for hotword')
 
-				# This generator yields AssistResponse proto messages
-				# received from the gRPC Google Assistant API.
-				for resp in self.assistant.Assist(iter_log_assist_requests(),
-												self.deadline):
-					assistant_helpers.log_assist_response_without_audio(resp)
-					if resp.event_type == END_OF_UTTERANCE:
-						logging.info('End of phrase detected, trimming audio...')
-						self.conversation_stream.stop_recording()
-						self.conversation_stream.start_recording()
-					if resp.speech_results:
-						transcript = ' '.join(r.transcript for r in resp.speech_results)
-						logging.info('Transcript of current speech: "%s".', transcript)
-						if any([match for match in hotphrases if match in transcript.lower()]):
-							self.conversation_stream.stop_recording()
-							file = "dial.mp3"
-							os.system("mpg123 -q "+ file) # plays sound after hearing hotWord, must wait untill sound is finished to contiune            
-							logging.info('Detected keyword, preparing for response:')
-							resp.audio_out.audio_data = bytes();
-							resp.speech_results.__delslice__(0,-1)
-							continue_conversation = True
-							while continue_conversation:
-								continue_conversation = self.assist()
-							break
+                # This generator yields AssistResponse proto messages
+                # received from the gRPC Google Assistant API.
+                for resp in self.assistant.Assist(iter_log_assist_requests(),
+                                              self.deadline):
+                    assistant_helpers.log_assist_response_without_audio(resp)
+                    if resp.event_type == END_OF_UTTERANCE:
+                        logging.info('End of phrase detected, trimming audio...')
+                        self.conversation_stream.stop_recording()
+                        self.conversation_stream.start_recording()
+                    if resp.speech_results:
+                        transcript = ' '.join(r.transcript for r in resp.speech_results)
+                        logging.info('Transcript of current speech: "%s".', transcript)
+                        if any([match for match in hotphrases if match in transcript.lower()]):
+                            self.conversation_stream.stop_recording()
+                       
+                            file = "dial.mp3"
+                            os.system("mpg123 -q "+ file) # plays sound after hearing hotWord, must wait untill sound is finished to contiune            
+                            logging.info('Detected keyword, preparing for response:')
+                            resp.audio_out.audio_data = bytes();
+                            resp.speech_results.__delslice__(0,-1)
+                            continue_conversation = True
+                            while continue_conversation:
+                                continue_conversation = self.assist()
+                            break
             
             except:
-				continue            
+				continue  
 
 
     @retry(reraise=True, stop=stop_after_attempt(3),
